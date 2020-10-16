@@ -38,7 +38,7 @@ class Login extends REST_Controller
 
 		$condiciones = array(
 			'usuario' => $data['usuario'],
-			'password' => $data['password']
+			'password' => md5($data['password'])
 		);
 
 		$login = $this->m_datos->login($condiciones);
@@ -53,7 +53,9 @@ class Login extends REST_Controller
 			return;
 		}
 
-		//AQUI, ya se valido usuario y contraseña
+		$this->response('validado');
+
+	/* 	//AQUI, ya se valido usuario y contraseña
 
 		//Generando Token Unico
 		$token = bin2hex(openssl_random_pseudo_bytes(20));
@@ -69,6 +71,6 @@ class Login extends REST_Controller
 			'codigo' => $login->codigo
 		);
 
-		$this->response($respuesta);
+		$this->response($respuesta); */
 	}
 }
